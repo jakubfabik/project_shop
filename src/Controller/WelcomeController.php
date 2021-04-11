@@ -18,6 +18,6 @@
       */
      public function homepage(): Response
      {
-         return $this->render('welcome.html.twig');
+         return $this->render('welcome.html.twig',['day' => date("m.d.y")]);
      }
  }
