@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PolozkaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,8 +41,14 @@ class Polozka
 
     /**
      * @ORM\ManyToMany(targetEntity="Kategoria")
+     * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
     private $kategoria;
+
+    public function __construct()
+    {
+        $this->kategoria = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +111,22 @@ class Polozka
     public function setKategoria(string $kategoria): self
     {
         $this->kategoria = $kategoria;
+
+        return $this;
+    }
+
+    public function addKategorium(Kategoria $kategorium): self
+    {
+        if (!$this->kategoria->contains($kategorium)) {
+            $this->kategoria[] = $kategorium;
+        }
+
+        return $this;
+    }
+
+    public function removeKategorium(Kategoria $kategorium): self
+    {
+        $this->kategoria->removeElement($kategorium);
 
         return $this;
     }

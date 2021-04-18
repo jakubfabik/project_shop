@@ -1,0 +1,22 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <div class="dropdown">
+    <a class="btn btn-dark" href="/" role="button">Home</a>
+    </div>
+    <div class="row">
+        {%  for polozka in polozky %}
+            <div class="col-sm-3" style="margin:1rem 3rem;">
+                <div class="card" style="width: 25rem; height: 50rem; background: aquamarine ">
+                    {% if polozka.obrazok %}<img class="card-img-top smalling" src="/images/{{ polozka.obrazok }}">{% endif %}
+                    <div class="card-body text-center">
+                        <h3 class="card-title">{{ polozka.nazov }}</h3>
+                        <p class="card-text">
+                            {{ polozka.opis }}
+                        </p>
+                        <h4 class="card-footer">{{ polozka.cena }}€</h4>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

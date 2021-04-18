@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ObjednavkaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,11 @@ class Objednavka
      * @ORM\ManyToOne(targetEntity="Pouzivatel")
      */
     private $pouzivatel;
+
+    public function __construct()
+    {
+        $this->zoznamPoloziek = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +110,28 @@ class Objednavka
     public function setPouzivatel(string $pouzivatel): self
     {
         $this->pouzivatel = $pouzivatel;
+
+        return $this;
+    }
+
+    public function addZoznamPoloziek(Polozka $zoznamPoloziek): self
+    {
+        if (!$this->zoznamPoloziek->contains($zoznamPoloziek)) {
+            $this->zoznamPoloziek[] = $zoznamPoloziek;
+            $zoznamPoloziek->setId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeZoznamPoloziek(Polozka $zoznamPoloziek): self
+    {
+        if ($this->zoznamPoloziek->removeElement($zoznamPoloziek)) {
+            // set the owning side to null (unless already changed)
+            if ($zoznamPoloziek->getId() === $this) {
+                $zoznamPoloziek->setId(null);
+            }
+        }
 
         return $this;
     }
