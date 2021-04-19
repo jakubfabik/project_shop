@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Kategoria;
+use App\Entity\Polozka;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,4 +37,17 @@ class PolozkyController extends AbstractController
             'polozky' => $polozky,
         ]);
     }
+
+    /**
+     * @Route("/polozky/{id}")
+     */
+    public function detaily($id, PolozkaRepository $repository): Response
+    {
+        $polozky = $repository->find($id);
+
+        return $this->render('detaily.html.twig',[
+            'polozky' => $polozky
+        ]);
+    }
+
 }

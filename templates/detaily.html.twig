@@ -1,0 +1,24 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+
+    <div class="">
+        <a href="/">Späť</a> &raquo;
+    </div>
+    <div class="row">
+            <div>
+                <h1>{{ polozky.nazov }}</h1>
+                <h2>{{ polozky.cena }}€</h2>
+                    <div class="card" style="width: 25rem;margin-left: 35%; height: 25rem;">
+                        {% if polozky.obrazok %}<img class="card-img-top smalling" src="/images/{{ polozky.obrazok }}">{% endif %}
+                    </div>
+            </div>
+
+                    <div class="card-body text-center">
+                        <p class="card-text">
+                            {{ polozky.opis }}
+                        </p>
+
+                    </div>
+
+    </div>
+{% endblock %}
