@@ -7,17 +7,15 @@
     </div>
 
 
-    <div>
+
         {% for clanok in clanky %}
-            <div>
-                <h1>
-                    {{ clanok.nazov }}
-                </h1>
-                <p> {{ clanok.text }}</p>
+            <div class="card">
+            <div class="card-body", style="margin: 1rem">
+                <h3 class="card-title">{{ clanok.nazov }}</h3>
+                <p class="card-text">{{ clanok.text }}</p>
+            </div>
             </div>
         {% endfor %}
-    </div>
-
 
 
 
