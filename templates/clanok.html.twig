@@ -1,0 +1,24 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+
+
+    <div class="dropdown">
+        <a class="btn btn-dark" href="/novy_clanok" role="button">Pridaj článok</a>
+    </div>
+
+
+    <div>
+        {% for clanok in clanky %}
+            <div>
+                <h1>
+                    {{ clanok.nazov }}
+                </h1>
+                <p> {{ clanok.text }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+
+{% endblock %}
