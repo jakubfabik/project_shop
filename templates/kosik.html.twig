@@ -1,0 +1,37 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+
+
+    <h1>Kosik</h1>
+    <div class="dropdown">
+        <a class="btn btn-dark" href="/" role="button">Späť</a>
+    </div>
+    <div class="row">
+
+    {%  for tovar in kosik %}
+        <div class="col-sm-3" style="margin:1rem 3rem;">
+        <div class="card" style="width: 25rem; background: white ">
+            <div>
+                {% if tovar.obrazok %}<img class="card-img-top smalling" src="/images/{{ tovar.obrazok }}" alt="">{% endif %}
+            </div>
+            <div>{{ tovar.nazov }}</div>
+            <div>{{ tovar.cena | number_format(2) }}</div>
+            <div>
+                <form method="post">
+                    <button class="btn btn-warning">Odober</button>
+                    <input type="hidden" name="id" value="{{ tovar.id }}">
+                </form>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+        <div></div>
+        <div>Spolu</div>
+        <div>€{{ spolu | number_format(2) }}</div>
+    </div>
+    </div>
+
+    <form action="checkout">
+        <button class="btn btn-success">Dokončenie objednávky</button>
+    </form>
+{% endblock %}

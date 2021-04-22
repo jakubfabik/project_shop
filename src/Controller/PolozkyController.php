@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Kategoria;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Repository\PolozkaRepository;
@@ -40,12 +42,22 @@ class PolozkyController extends AbstractController
     /**
      * @Route ("/polozky/{id}")
      */
-    public function detail($id, PolozkaRepository $repository): Response
+    public function detail($id, Request $request, PolozkaRepository $repository, SessionInterface $session): Response
     {
         $polozky = $repository->find($id);
 
+        $kosik = $session->get('kosik', []);
+
+        if ($request->isMethod('POST')) {
+            $kosik[$polozky->getId()] = $polozky;
+            $session->set('kosik', $kosik);
+        }
+
+        $vKosiku = array_key_exists($polozky->getId(), $kosik);
+
         return $this->render('detaily.html.twig', [
             'polozky' => $polozky,
+            'vKosiku' => $vKosiku,
         ]);
     }
 }
