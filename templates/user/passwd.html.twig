@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block pageTitle %}Zmena hesla{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-4 offset-4">
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    Zmena hesla pre používateľa <b>{{ user.username }}</b>
+                </div>
+                <div class="card-body">
+                    {{ form_errors(form) }}
+                    {{ form(form) }}
+                </div>
+                <div class="card-footer">
+                    Heslo musí obsahovať aspoň 8 znakov.
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

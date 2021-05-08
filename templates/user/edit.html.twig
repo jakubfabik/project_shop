@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% if form.vars.value.id == 0%}
+    {% set formLabel = 'Nový používateľ' %}
+{% else %}
+    {% set formLabel = 'Upraviť používateľa' %}
+{% endif %}
+
+{% block title %}{{ formLabel }}{% endblock %}
+
+{% block content %}
+    <div class="col-6 offset-3">
+        <div class="card mt-4">
+            <div class="card-header">{{ formLabel }}</div>
+            <div class="card-body">
+                {{ form_errors(form) }}
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

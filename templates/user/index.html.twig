@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Používatela{% endblock %}
+
+{% block content %}
+    <h1>Zoznam používateľov</h1>
+    <a class="btn btn-success my-2" href="{{ path('user_edit') }}"><i class="fa fa-plus"></i> Nový používateľ</a>
+    <table class="table table-bordered table-hover table-striped my-2">
+        <thead>
+        <tr>
+            <th>Login</th>
+            <th>Meno</th>
+            <th>Priezvisko</th>
+            <th>Mail</th>
+            <th>Roly</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles | join(', ') }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('user_edit', {'userId': user.id}) }}"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" href="{{ path('user_delete', {'userId': user.id}) }}"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
