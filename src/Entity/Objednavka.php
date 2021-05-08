@@ -40,9 +40,9 @@ class Objednavka
     private $zoznamPoloziek;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Pouzivatel")
+     * @ORM\ManyToOne(targetEntity="User")
      */
-    private $pouzivatel;
+    private $user;
 
     public function __construct()
     {
