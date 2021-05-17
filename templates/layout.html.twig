@@ -30,6 +30,21 @@
             <div class="dropdown" >
                 <a class="btn btn-dark",  href="/kosik" role="button" style="margin-left: 15px">Košík</a>
             </div>
+            {% if is_granted('ROLE_ADMIN') %}
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Používatelia
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ path('user_edit') }}"><i class="fa fa-plus"></i> Nový používateľ</a>
+                    <a class="dropdown-item" href="{{ path('user_index') }}"><i class="fa fa-list"></i> Zoznam
+                        používateľov</a>
+                </div>
+            </div>
+            {% endif %}
+
+
         </div>
 
 
