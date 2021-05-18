@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Role;
-use App\Entity\User;
+use App\Entity\User\Role;
+use App\Entity\User\User;
 use App\Form\Model\ChangePassword;
 use App\Form\User\ChangePasswordType;
 use App\Form\User\EditUserType;

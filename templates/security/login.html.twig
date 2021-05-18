@@ -1,11 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}CMS Login{% endblock %}
 
 {% block body %}
     <div class="col-4 offset-4 mt-4">
         <div class="card">
-            <div class="card-header bg-primary text-white"><b>Symfony</b> CMS</div>
             <div class="card-body login-card-body">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -14,20 +13,10 @@
                 <form action="{{ path('login') }}" method="post">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="_username" placeholder="Prihlasovacie meno">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fa fa-user"></span>
-                            </div>
-                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" class="form-control" name="_password" placeholder="Heslo">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fa fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
+                     </div>
                     <div class="row">
                         <div class="col-6 offset-6">
                             <button type="submit" class="btn btn-primary btn-block btn-flat">Prihlásiť sa</button>

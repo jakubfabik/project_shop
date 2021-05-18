@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}Používatela{% endblock %}
 
-{% block content %}
+{% block body %}
     <h1>Zoznam používateľov</h1>
     <a class="btn btn-success my-2" href="{{ path('user_edit') }}"><i class="fa fa-plus"></i> Nový používateľ</a>
     <table class="table table-bordered table-hover table-striped my-2">
@@ -25,8 +25,8 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles | join(', ') }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('user_edit', {'userId': user.id}) }}"><i class="fa fa-edit"></i></a>
-                    <a class="btn btn-danger" href="{{ path('user_delete', {'userId': user.id}) }}"><i class="fa fa-trash"></i></a>
+                    <a class="btn btn-primary" href="{{ path('user_edit', {'userId': user.id}) }}">Uprav<i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" href="{{ path('user_delete', {'userId': user.id}) }}">Vymaž<i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         {% endfor %}

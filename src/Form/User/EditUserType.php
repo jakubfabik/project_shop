@@ -8,7 +8,7 @@
 
 namespace App\Form\User;
 
-use App\Entity\User;
+use App\Entity\User\User;
 use Doctrine\ORM\EntityManagerInterface;
 #use SebastianBergmann\CodeCoverage\Report\Text;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -72,7 +72,7 @@ class EditUserType extends AbstractType {
             ])
             ->add('roleObjects', EntityType::class,
                 [
-                    'class'        => 'App\Entity\Role',
+                    'class'        => 'App\Entity\User\Role',
                     'choice_label' => 'name',
                     'multiple'     => true,
                     'expanded'     => false,
