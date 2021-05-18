@@ -36,11 +36,15 @@
                    aria-haspopup="true" aria-expanded="false">
                     Používatelia
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ path('user_edit') }}"><i class="fa fa-plus"></i> Nový používateľ</a>
                     <a class="dropdown-item" href="{{ path('user_index') }}"><i class="fa fa-list"></i> Zoznam
                         používateľov</a>
-                </div>
+                <a class="dropdown-item" href="{{ path('user_passwd') }}"><i class="fa fa-key"></i> Zmeniť heslo</a>
+
+
+
+
+
             </div>
             {% endif %}
 
