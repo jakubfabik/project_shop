@@ -3,16 +3,18 @@
 
 
     <div class="dropdown">
-        <a class="btn btn-dark" href="/novy_clanok" role="button">Pridaj článok</a>
+        <a class="btn btn-dark" href="{{ path('uprav_clanok') }}" role="button">Pridaj článok</a>
     </div>
 
-s
 
         {% for clanok in clanky %}
             <div class="card">
             <div class="card-body", style="margin: 1rem">
                 <h3 class="card-title">{{ clanok.nazov }}</h3>
                 <p class="card-text">{{ clanok.text }}</p>
+                <a class="btn btn-primary" href="{{ path('uprav_clanok', {clanokId: clanok.id}) }}"><i
+                            class="fa fa-edit"></i>Uprav</a>
+
             </div>
             </div>
         {% endfor %}

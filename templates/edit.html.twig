@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% if form.vars.value.id == 0%}
+    {% set formLabel = 'Nový článok' %}
+{% else %}
+    {% set formLabel = 'Upraviť článok' %}
+{% endif %}
+
+{% block title %}{{ formLabel }}{% endblock %}
+
+{% block content %}
+    <div class="col-10 offset-1">
+        <div class="card mt-4">
+            <div class="card-header">{{ formLabel }}</div>
+            <div class="card-body">
+                {{ form_errors(form) }}
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '.ckeditor' ) )
+            .catch( error => {
+            console.error( error );
+        } );
+    </script>
+{% endblock %}
