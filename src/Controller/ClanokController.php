@@ -86,5 +86,22 @@ class ClanokController extends AbstractController
         ));
     }
 
+    /**
+     * @Route("/vymaz/{clanokId}", defaults={"clanokId" = 0}, name="vymaz_clanok")
+     * @param Request $request
+     * @param int $clanokId
+     * @param LoggerInterface $logger
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+
+    public function vymazClanok(int $clanokId, EntityManagerInterface $entityManager){
+        $clanok = $entityManager->find(Clanok::class, $clanokId);
+        $entityManager->remove($clanok);
+        $entityManager->flush();
+        // presmerovanie na index - zoznam dokumentov
+        return $this->forward('App\Controller\ClanokController::index');
+
+    }
 
 }
