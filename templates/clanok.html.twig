@@ -1,10 +1,11 @@
 {% extends "layout.html.twig" %}
 {% block content %}
 
-
+    {% if is_granted('ROLE_ADMIN') %}
     <div class="dropdown">
         <a class="btn btn-dark" href="{{ path('uprav_clanok') }}" role="button">Pridaj článok</a>
     </div>
+     {% endif %}
 
 
         {% for clanok in clanky %}
@@ -12,10 +13,12 @@
             <div class="card-body", style="margin: 1rem">
                 <h3 class="card-title">{{ clanok.nazov }}</h3>
                 <p class="card-text">{{ clanok.text }}</p>
-                <a class="btn btn-primary" href="{{ path('uprav_clanok', {clanokId: clanok.id}) }}"><i
-                            class="fa fa-edit"></i>Uprav</a>
-                <a class="btn btn-warning" href="{{ path('vymaz_clanok', {clanokId: clanok.id}) }}"><i
-                            class="fa fa-edit"></i>Vymaž</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-primary" href="{{ path('uprav_clanok', {clanokId: clanok.id}) }}"><i
+                                class="fa fa-edit"></i>Uprav</a>
+                    <a class="btn btn-warning" href="{{ path('vymaz_clanok', {clanokId: clanok.id}) }}"><i
+                                class="fa fa-edit"></i>Vymaž</a>
+                {% endif %}
 
             </div>
             </div>
