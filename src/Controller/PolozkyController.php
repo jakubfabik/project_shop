@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Kategoria;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Polozka;
 
 use App\Repository\PolozkaRepository;
 use App\Repository\KategoriaRepository;
@@ -59,5 +61,23 @@ class PolozkyController extends AbstractController
             'polozky' => $polozky,
             'vKosiku' => $vKosiku,
         ]);
+    }
+
+    /**
+     * @Route("/vymaz_polozku/{id}", defaults={"id" = 0}, name="vymaz_polozku")
+     * @param Request $request
+     * @param int $id
+     * @param LoggerInterface $logger
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+
+    public function vymazPolozku(int $id, EntityManagerInterface $entityManager){
+        $polozka = $entityManager->find(Polozka::class, $id);
+        $entityManager->remove($polozka);
+        $entityManager->flush();
+        // presmerovanie na index - zoznam dokumentov
+        return $this->forward('App\Controller\PolozkyController::index');
+
     }
 }

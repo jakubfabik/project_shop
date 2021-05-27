@@ -21,6 +21,10 @@
                         {{ polozka.opis }}
                     </p>
                     <h4 class="card-footer">{{ polozka.cena }}€</h4>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-warning" href="{{ path('vymaz_polozku', {id: polozka.id}) }}"><i
+                                class="fa fa-edit"></i>Vymaž položku</a>
+                        {% endif %}
                 </div>
             </div>
         </div>
