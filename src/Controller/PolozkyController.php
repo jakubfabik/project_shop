@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Polozka;
-
+use Psr\Log\LoggerInterface;
 use App\Repository\PolozkaRepository;
 use App\Repository\KategoriaRepository;
 
@@ -80,4 +80,51 @@ class PolozkyController extends AbstractController
         return $this->forward('App\Controller\PolozkyController::index');
 
     }
+
+    /**
+     * @Route("/uprav_polozku/{id}", defaults={"clanokId" = 0}, name="uprav_polozku")
+     * @param Request $request
+     * @param int $id
+     * @param LoggerInterface $logger
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+
+    public function upravPolozku(Request $request, int $id, LoggerInterface $logger, EntityManagerInterface $entityManager) {
+
+        if ($id == 0) {
+            $logger->info("Vytvor novu polozku");
+            $documentModel = new Polozka();
+            /** @var User $user */
+            $user = $this->getUser();
+        } else {
+            $logger->info("Upravit polozku: {$id}");
+            $documentModel = $entityManager->find(Polozka::class, $id);
+        }
+
+        $form = $this->createForm(UpravPolozkuController::class, $documentModel);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $entityManager->persist($documentModel);
+                $entityManager->flush();
+                if ($id == 0) {
+                    $this->addFlash('success', "Položka {$documentModel->getNazov()} bola vytvorená.");
+                } else {
+                    $this->addFlash('success', "Položka {$documentModel->getNazov()} bola upravená.");
+                }
+
+            } catch (\Exception $e) {
+                $this->addFlash('danger', "Položku sa nepodarilo uložiť: {$e->getMessage()}");
+            }
+
+            return $this->forward('App\Controller\PolozkyController::index');
+        }
+
+        return $this->render('uprav_polozku.html.twig', array(
+            'form'           => $form->createView()
+        ));
+    }
 }
+

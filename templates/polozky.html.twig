@@ -24,6 +24,8 @@
                     {% if is_granted('ROLE_ADMIN') %}
                     <a class="btn btn-warning" href="{{ path('vymaz_polozku', {id: polozka.id}) }}"><i
                                 class="fa fa-edit"></i>Vymaž položku</a>
+                        <a class="btn btn-primary" href="{{ path('uprav_polozku', {id: polozka.id}) }}"><i
+                                    class="fa fa-edit"></i>Uprav položku</a>
                         {% endif %}
                 </div>
             </div>
