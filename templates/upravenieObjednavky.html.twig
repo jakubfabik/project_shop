@@ -1,0 +1,47 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <div class="row">
+        <table class="table">
+            <thead>
+            <th scope="col">Id objednávky</th>
+            <th scope="col">Id používateľa</th>
+            <th scope="col">Čas vytvorenia</th>
+            <th scope="col">Čas odoslania</th>
+            <th scope="col">Stav</th>
+            <th scope="col">Zoznam položiek</th>
+            <th scope="col">Vymazať</th>
+            </thead>
+            <tbody>
+                {%  for objednavka in objednavky %}
+                    <tr>
+                        <th scope="row">{{ objednavka.id }}</th>
+                        <td>{{ objednavka.user }}</td>
+                        <td>{{ objednavka.cas_vytvorenia|date('Y-m-d H:i:s') }}</td>
+                        {% if objednavka.cas_odoslania != null %}
+                            <td>{{ objednavka.cas_odoslania|date('Y-m-d H:i:s') }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                        {% if objednavka.stav_objednavky == 'nova' %}
+                            <td style="color: red">{{ objednavka.stav_objednavky }}
+                                <a class="btn btn-primary" href="{{ path('uprav_objednavku', {objednavkaId: objednavka.id}) }}"><i class="fa fa-paper-plane "></i></a>
+                            </td>
+                        {% elseif objednavka.stav_objednavky == 'odoslana'%}
+                            <td style="color: orange">{{ objednavka.stav_objednavky }}
+                                <a class="btn btn-success" href="{{ path('uprav_objednavku', {objednavkaId: objednavka.id}) }}"><i class="fa fa-check"></i></a>
+                            </td>
+                        {% elseif objednavka.stav_objednavky == 'vybavena'%}
+                            <td style="color: green">{{ objednavka.stav_objednavky }}</td>
+                        {% endif%}
+
+                        <td>{{ objednavka.zoznam_poloziek }}</td>
+                        <td>
+                            <a class="btn btn-danger" href="{{ path('vymaz_objednavku', {objednavkaId: objednavka.id}) }}"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
