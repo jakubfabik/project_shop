@@ -22,31 +22,33 @@ class Objednavka
     /**
      * @ORM\Column(type="datetime")
      */
-    private $casVytvorenia;
+    private $cas_vytvorenia;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="integer")
      */
-    private $casOdoslania;
+    private $user;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $cas_odoslania = null;
 
     /**
      * @ORM\Column(type="string", length=10)
      */
-    private $stavObjednavky;
+    private $stav_objednavky;
 
     /**
-     * @ORM\OneToMany(targetEntity="Polozka", mappedBy="id")
+     * @ORM\Column(type="string", length=50)
      */
-    private $zoznamPoloziek;
+    private $zoznam_poloziek;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="User")
-     */
-    private $user;
+
 
     public function __construct()
     {
-        $this->zoznamPoloziek = new ArrayCollection();
+        $this->zoznam_poloziek = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,85 +56,64 @@ class Objednavka
         return $this->id;
     }
 
-    public function getCasVytvorenia(): ?\DateTimeInterface
+    public function getcas_vytvorenia(): ?\DateTimeInterface
     {
-        return $this->casVytvorenia;
+        return $this->cas_vytvorenia;
     }
 
-    public function setCasVytvorenia(\DateTimeInterface $casVytvorenia): self
+    public function setCasVytvorenia(\DateTimeInterface $cas_vytvorenia): self
     {
-        $this->casVytvorenia = $casVytvorenia;
+        $this->cas_vytvorenia = $cas_vytvorenia;
 
         return $this;
     }
 
-    public function getCasOdoslania(): ?\DateTimeInterface
+    public function getcas_odoslania(): ?\DateTimeInterface
     {
-        return $this->casOdoslania;
+        return $this->cas_odoslania;
     }
 
-    public function setCasOdoslania(\DateTimeInterface $casOdoslania): self
+    public function setCasOdoslania(\DateTimeInterface $cas_odoslania=null): self
     {
-        $this->casOdoslania = $casOdoslania;
+        $this->cas_odoslania = $cas_odoslania;
 
         return $this;
     }
 
-    public function getStavObjednavky(): ?string
+    public function getstav_objednavky(): ?string
     {
-        return $this->stavObjednavky;
+        return $this->stav_objednavky;
     }
 
-    public function setStavObjednavky(string $stavObjednavky): self
+    public function setStavObjednavky(string $stav_objednavky): self
     {
-        $this->stavObjednavky = $stavObjednavky;
+        $this->stav_objednavky = $stav_objednavky;
 
         return $this;
     }
 
-    public function getZoznamPoloziek(): ?string
+    public function getzoznam_poloziek(): ?string
     {
-        return $this->zoznamPoloziek;
+        return $this->zoznam_poloziek;
     }
 
-    public function setZoznamPoloziek(string $zoznamPoloziek): self
+    public function setZoznamPoloziek(string $zoznam_poloziek): self
     {
-        $this->zoznamPoloziek = $zoznamPoloziek;
+        $this->zoznam_poloziek = $zoznam_poloziek;
 
         return $this;
     }
 
-    public function getPouzivatel(): ?string
+    public function getuser(): ?int
     {
-        return $this->pouzivatel;
+        return $this->user;
     }
 
-    public function setPouzivatel(string $pouzivatel): self
+    public function setPouzivatel(int $user): self
     {
-        $this->pouzivatel = $pouzivatel;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function addZoznamPoloziek(Polozka $zoznamPoloziek): self
-    {
-        if (!$this->zoznamPoloziek->contains($zoznamPoloziek)) {
-            $this->zoznamPoloziek[] = $zoznamPoloziek;
-            $zoznamPoloziek->setId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeZoznamPoloziek(Polozka $zoznamPoloziek): self
-    {
-        if ($this->zoznamPoloziek->removeElement($zoznamPoloziek)) {
-            // set the owning side to null (unless already changed)
-            if ($zoznamPoloziek->getId() === $this) {
-                $zoznamPoloziek->setId(null);
-            }
-        }
-
-        return $this;
-    }
 }
