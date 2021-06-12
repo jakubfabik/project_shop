@@ -56,7 +56,7 @@ class Objednavka
         return $this->id;
     }
 
-    public function getCasVytvorenia(): ?\DateTimeInterface
+    public function getcas_vytvorenia(): ?\DateTimeInterface
     {
         return $this->cas_vytvorenia;
     }
@@ -68,7 +68,7 @@ class Objednavka
         return $this;
     }
 
-    public function getCasOdoslania(): ?\DateTimeInterface
+    public function getcas_odoslania(): ?\DateTimeInterface
     {
         return $this->cas_odoslania;
     }
@@ -80,7 +80,7 @@ class Objednavka
         return $this;
     }
 
-    public function getStavObjednavky(): ?string
+    public function getstav_objednavky(): ?string
     {
         return $this->stav_objednavky;
     }
@@ -92,9 +92,9 @@ class Objednavka
         return $this;
     }
 
-    public function getZoznamPoloziek(): ?string
+    public function getzoznam_poloziek(): ?string
     {
-        return $this->zoznam_poloziekk;
+        return $this->zoznam_poloziek;
     }
 
     public function setZoznamPoloziek(string $zoznam_poloziek): self
@@ -104,12 +104,12 @@ class Objednavka
         return $this;
     }
 
-    public function getPouzivatel(): ?int
+    public function getuser(): ?int
     {
         return $this->user;
     }
 
-    public function setPouzivatel(int $user): self
+    public function setuser(int $user): self
     {
         $this->user = $user;
 
