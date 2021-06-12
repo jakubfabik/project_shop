@@ -30,9 +30,9 @@ class Objednavka
     private $user;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private $cas_odoslania;
+    private $cas_odoslania = null;
 
     /**
      * @ORM\Column(type="string", length=10)
