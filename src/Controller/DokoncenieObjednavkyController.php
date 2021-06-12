@@ -62,7 +62,7 @@ class DokoncenieObjednavkyController extends AbstractController
             $objednavka->setStavObjednavky("nova");
             $objednavka->setCasVytvorenia($cas);
             $objednavka->setCasOdoslania($cas);
-            $objednavka->setPouzivatel($userID);
+            $objednavka->setuser($userID);
             $objednavka->setZoznamPoloziek($polozkyVobjednavke);
 
 
