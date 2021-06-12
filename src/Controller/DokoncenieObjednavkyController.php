@@ -61,7 +61,7 @@ class DokoncenieObjednavkyController extends AbstractController
             //todo zapisat do databazy objednavku
             $objednavka->setStavObjednavky("nova");
             $objednavka->setCasVytvorenia($cas);
-            $objednavka->setCasOdoslania(null);
+            $objednavka->setCasOdoslania($cas);
             $objednavka->setPouzivatel($userID);
             $objednavka->setZoznamPoloziek($polozkyVobjednavke);
 

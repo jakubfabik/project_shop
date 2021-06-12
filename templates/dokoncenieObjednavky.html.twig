@@ -1,0 +1,22 @@
+﻿{% extends "layout.html.twig" %}
+{% block content %}
+
+
+    <h1>Dokoncenie objednavky</h1>
+
+    <div class="checkout-total">
+        <p>objednavatel: {{ pouzivatel }}</p>
+        <p>Užívatelské ID: {{ userID }}</p>
+        <p>IDčka objednávok: {{ polozkyID }}</p>
+        <p>Čas operácie: {{ cas_vytvorenia | date("Y-m-d H:i:s")}}</p>
+        <p>stav: {{ stav }}</p>
+        <div>Spolu</div>
+        <div>€{{ spolu | number_format(2) }}</div>
+    </div>
+
+    {{ form(form) }}
+
+
+
+
+{% endblock %}
