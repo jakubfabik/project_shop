@@ -12,7 +12,11 @@
                     {% if vKosiku %}
                         <button class="btn btn-success" disabled>Tovar je v košíku</button>
                     {% else %}
-                        <button class="btn btn-primary">Pridať do košíka</button>
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+                            <button class="btn btn-primary">Pridať do košíka</button>
+                        {% else %}
+                            <i style="color:red">Pre pridanie do košíka je potrebné prihlásenie</i>
+                        {% endif %}
                     {% endif %}
                 </form>
                     <div class="card" style="width: 25rem;margin-left: 35%; height: 25rem;">
